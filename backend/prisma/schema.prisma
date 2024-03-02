@@ -12,3 +12,24 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Client {
+  id          String   @id @default(uuid())
+  code        String   @unique
+  name        String
+  network     String
+  assistantId String?
+  createdAt   DateTime @default(now())
+
+  Assistant Assistant? @relation(fields: [assistantId], references: [id])
+}
+
+model Assistant {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  email     String   @unique
+  phone     String   @unique
+  createdAt DateTime @default(now())
+
+  Client Client[]
+}
