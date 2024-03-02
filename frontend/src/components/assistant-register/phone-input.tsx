@@ -1,0 +1,19 @@
+import { PatternFormat, PatternFormatProps } from "react-number-format";
+import { Input } from "../ui/input";
+
+type PhoneInputType = {
+  error?: boolean;
+} & Partial<PatternFormatProps>;
+
+const PhoneInput = ({ ...props }: PhoneInputType) => {
+  return (
+    <PatternFormat
+      {...props}
+      format="(##) #####-####"
+      customInput={Input}
+      placeholder="(99) 99999-9999"
+    />
+  );
+};
+
+export default PhoneInput;
