@@ -23,7 +23,7 @@ export type InputContainerProps = ComponentPropsWithoutRef<"div"> & {
 export type InputLabelProps = ComponentPropsWithoutRef<"label"> & {
   children: ReactNode;
 };
-export type InputIconContainerProps = ComponentPropsWithoutRef<"div"> & {
+export type InputIconContainerProps = ComponentPropsWithoutRef<"label"> & {
   children: ReactNode;
   Icon?: React.ElementType;
 };
@@ -120,18 +120,18 @@ const InputIconContainer = ({
   );
 
   return (
-    <div className={InputLabelClassName} {...rest}>
+    <label className={InputLabelClassName} {...rest}>
       {Icon && (
-        <div className="absolute left-2 top-1/2 -translate-y-1/2 transform disabled:cursor-not-allowed disabled:opacity-50">
+        <span className="absolute left-2 top-1/2 -translate-y-1/2 transform disabled:cursor-not-allowed disabled:opacity-50">
           <Icon
             width={13}
             height={13}
             className="size-[0.8125rem] text-content-title"
           />
-        </div>
+        </span>
       )}
       {children}
-    </div>
+    </label>
   );
 };
 

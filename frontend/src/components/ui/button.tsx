@@ -22,11 +22,12 @@ const buttonVariants = cva(
         icon: "bg-transparent text-content-base hover:bg-layout-body hover:text-primary",
       },
       size: {
-        default: "leading-1.5 px-4 py-1 rounded-[1.125rem] w-fit gap-1",
+        default:
+          "leading-1.5 px-4 py-1 rounded-[1.125rem] w-fit gap-1 items-center",
         sm: "h-8 rounded-md px-3 text-xs",
         lg: "h-10 rounded-md px-8",
-        icon: "px-1.5 py-1.5 rounded-lg w-fit ",
-        iconLarge: "rounded-[1.375rem] px-4 py-1 w-fit ",
+        icon: "px-1.5 py-1.5 rounded-lg w-fit items-center ",
+        iconLarge: "rounded-[1.375rem] px-4 py-1 w-fit items-center",
       },
       selected: {
         default: "",
@@ -61,4 +62,5 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 );
 Button.displayName = "Button";
 
+//eslint-disable-next-line
 export { Button, buttonVariants };
