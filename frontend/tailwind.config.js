@@ -54,15 +54,21 @@ module.exports = {
         },
         'layout-body': '#eaedee',
         'layout-surface': '#ffffff',
-        'content-base': '#404040',
         'content-title': '#121929',
-        'content-placeholder': '#121929A3',
+        'content-base': '#121929A3',
+        'content-placeholder': '#1219297A',
         'interactive-secondary': "#1219291F",
+        'interactive-alt-primary': "#ffffff",
         'interactive-destructive': "#ff4e3a",
         'button-secondary': '#5e17f5',
+        'neutral-white': "#ffffff",
+        'overlay': '#121929B8'
 
 
 
+      },
+      lineHeight: {
+        'button-modal': '1.1875rem'
       },
       borderRadius: {
         lg: "var(--radius)",
