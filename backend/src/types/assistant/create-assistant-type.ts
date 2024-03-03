@@ -7,7 +7,7 @@ export const createAssistantBody = z.object({
     .min(1, "Você precisa preencher este campo")
     .max(200, "Você ultrapassou o limite de 200 caracteres")
     .toLowerCase()
-    .regex(/^[a-zA-Z0-9]+$/, "Este campo só aceita letras e números"),
+    .regex(/^[a-zA-Z0-9]+(?: [a-zA-Z0-9]+)*$/),
 
   email: z
     .string()
@@ -20,7 +20,8 @@ export const createAssistantBody = z.object({
   phone: z
     .string({ invalid_type_error: "O valor precisa ser uma string" })
     .trim()
-    .min(1, "Você precisa preencher este campo")
-    .max(9, "Você ultrapassou o limite de 9 caracteres")
+    .min(11, "Preencha o telefone todo")
+    .max(11, "Você ultrapassou o limite de 11 caracteres")
+    .regex(/^\d{11}$/, "Preencha todos os números")
     .transform((str) => str.replace(/\D/g, "")),
 });
