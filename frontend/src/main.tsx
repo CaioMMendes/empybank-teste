@@ -6,6 +6,9 @@ import ErrorPage from "./pages/error-page.tsx";
 import NotFoundPage from "./pages/not-found-page.tsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import ReactQueryProvider from "./providers/react-query-provider.tsx";
+import { ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +26,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ReactQueryProvider>
       <RouterProvider router={router} />
+      <ToastContainer style={{ zIndex: 60, pointerEvents: "auto" }} />
     </ReactQueryProvider>
   </React.StrictMode>,
 );
