@@ -5,6 +5,7 @@ import "./index.css";
 import ErrorPage from "./pages/error-page.tsx";
 import NotFoundPage from "./pages/not-found-page.tsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import ReactQueryProvider from "./providers/react-query-provider.tsx";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ReactQueryProvider>
+      <RouterProvider router={router} />
+    </ReactQueryProvider>
   </React.StrictMode>,
 );
