@@ -1,5 +1,7 @@
 import { app } from "./app";
 
-app.listen(process.env.PORT, () => {
-  console.log(`Running on port ${process.env.PORT}`);
+app.listen(process.env.PORT || 3333, () => {
+  console.log(
+    `Running on port ${process.env.PORT ? process.env.PORT : "3333"}`
+  );
 });
