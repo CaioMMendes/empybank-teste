@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 
-export const toastSucess = (text: string) => {
+export const toastSuccess = (text: string) => {
   toast.success(text, {
     position: "top-right",
     autoClose: 3500,
