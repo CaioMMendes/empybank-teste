@@ -10,6 +10,8 @@ const PhoneInput = ({ ...props }: PhoneInputType) => {
     <PatternFormat
       {...props}
       format="(##) #####-####"
+      autoComplete="tel-national"
+      defaultValue={""}
       customInput={Input}
       placeholder="(99) 99999-9999"
     />
