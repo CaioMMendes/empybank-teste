@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import {
@@ -9,6 +9,13 @@ import {
 } from "../ui/alert-dialog";
 import { Input, InputContainer, InputLabel, InputLabelText } from "../ui/input";
 import { clientFormSchema } from "./types/client-form-schema";
+import { useMutation } from "@tanstack/react-query";
+import {
+  CreateClientDataResponse,
+  NewClientResponse,
+  createClient,
+} from "@/fetch/client/create-client";
+import { toastError, toastSuccess } from "../toast";
 
 type ClientFormProps = {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
@@ -16,23 +23,62 @@ type ClientFormProps = {
 
 type ClientFormData = z.infer<typeof clientFormSchema>;
 
+type ErrorWithResponse = {
+  response: {
+    data: {
+      message: string;
+    };
+  };
+} & Error;
+
 const ClientForm = ({ setIsModalOpen }: ClientFormProps) => {
+  const abortControllerRef = useRef(new AbortController());
+
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<ClientFormData>({
     resolver: zodResolver(clientFormSchema),
   });
 
+  const { mutate, isPending } = useMutation<
+    CreateClientDataResponse,
+    ErrorWithResponse,
+    ClientFormData
+  >({
+    mutationFn: (newClient) =>
+      createClient(newClient, abortControllerRef.current.signal),
+    onSuccess: (data) => handleSuccessResponse(data?.data?.client),
+    onError: handleErrorResponse,
+  });
+
   const handleCancelClick = () => {
     setIsModalOpen(false);
+    abortControllerRef.current.abort();
   };
 
   const onSubmit = async (data: ClientFormData) => {
     console.log(data);
-    setIsModalOpen(false);
+    mutate(data);
   };
+
+  function handleSuccessResponse(data: NewClientResponse) {
+    console.log(data);
+    toastSuccess("Cliente cadastrado");
+    reset();
+  }
+
+  function handleErrorResponse(error: ErrorWithResponse) {
+    console.log(error);
+    if (error?.name === "CanceledError") {
+      return toastError("A requisição foi cancelada");
+    }
+
+    const errorMessage = error?.response?.data?.message;
+    toastError(errorMessage || "Ocorreu um erro ao tentar cadastrar o cliente");
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6 p-6">
@@ -78,7 +124,9 @@ const ClientForm = ({ setIsModalOpen }: ClientFormProps) => {
           Cancelar
         </AlertDialogCancel>
 
-        <AlertDialogAction type="submit">Salvar</AlertDialogAction>
+        <AlertDialogAction type="submit" disabled={isPending}>
+          Salvar
+        </AlertDialogAction>
       </AlertDialogFooter>
     </form>
   );
