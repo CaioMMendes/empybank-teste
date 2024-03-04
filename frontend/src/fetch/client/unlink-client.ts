@@ -1,18 +1,31 @@
+import { GenericAbortSignal } from "axios";
 import fetchFunction from "../fetch-function";
+
+export type UnlinkClientDataResponse = {
+  data: {
+    client: {
+      count: number;
+    };
+  };
+};
 
 /**
  *
  * @param clientsId array com os ids dos clientes que vão ser desassociados do atual assistente
- * @returns
+ * @param signal: GenericAbortSignal,
+ * @returns retorna o numero de clientes que foram desvinculados do assistente
  */
 
-export const linkClient = async (clientsId: string[]) => {
-  const response = await fetchFunction({
+export const unlinkClient = async (
+  clientsId: string[],
+  signal: GenericAbortSignal,
+) => {
+  const response: UnlinkClientDataResponse = await fetchFunction({
     url: `/client/unlink`,
     type: "patch",
     body: clientsId,
+    signal,
   });
 
-  //todo o metodo updatemany não retorna nada, se precisar retornar vai ter que fazer outra consulta
   return response;
 };
