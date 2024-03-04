@@ -94,8 +94,9 @@ module.exports = {
         sans: ['Roboto', 'sans-serif']
       },
       screens: {
-        '3xl': '1536px',
-        '4xl': '1920px'
+        '3xl': '1440px',
+        '4xl': '1536px',
+        '5xl': '1920px'
       }
     },
   },
