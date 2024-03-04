@@ -7,7 +7,8 @@ export const assistantFormSchema = z.object({
     .min(1, "Você precisa preencher este campo")
     .max(200, "Você ultrapassou o limite de 200 caracteres")
     .toLowerCase()
-    .regex(/^[a-zA-Z0-9]+$/, "Este campo só aceita letras e números"),
+    .regex(/^[a-zA-Z\s]+$/, "Este campo só aceita letras")
+    .transform((str) => str.replace(/\s+/g, " ")),
 
   email: z
     .string()
