@@ -10,7 +10,7 @@ type ClientFormData = z.infer<typeof clientFormSchema>;
 type ClientResponse = {
   id: string;
   createdAt: Date;
-  AssistantId: string;
+  assistantId: string;
 } & ClientFormData;
 
 export type GetUniqueAssistantResponse = {
