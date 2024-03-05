@@ -10,7 +10,7 @@ const Table = React.forwardRef<
   <table
     ref={ref}
     className={cn(
-      "flex  h-[43.5rem] w-full caption-bottom flex-col gap-4 overflow-auto text-sm",
+      "flex  h-[42.5rem] w-full caption-bottom flex-col gap-4 overflow-auto text-sm",
       className,
     )}
     {...props}
@@ -65,7 +65,7 @@ const TableRow = React.forwardRef<
   <tr
     ref={ref}
     className={cn(
-      "flex w-full items-center justify-between gap-3  rounded-[1.125rem] border bg-layout-body  px-4 py-3 transition-colors data-[state=selected]:!border data-[state=selected]:!border-primary [&:has([role=checkbox])]:!border-layout-surface [&>*:nth-child(1)]:w-[1.125rem] [&>*:nth-child(1)]:justify-center [&>*:nth-child(2)]:w-16 [&>*:nth-child(3)]:flex-1 [&>*:nth-child(3)]:flex-nowrap [&>*:nth-child(3)]:truncate     [&>*:nth-child(4)]:w-16 ",
+      "flex w-full items-center justify-between gap-3  rounded-[1.125rem] border bg-layout-body  px-4 py-3 transition-colors data-[state=selected]:!border data-[state=selected]:!border-primary  [&>*:nth-child(1)]:w-[1.125rem] [&>*:nth-child(1)]:justify-center [&>*:nth-child(2)]:w-16 [&>*:nth-child(3)]:flex-1 [&>*:nth-child(3)]:flex-nowrap [&>*:nth-child(3)]:truncate     [&>*:nth-child(4)]:w-16 ",
       className,
     )}
     {...props}

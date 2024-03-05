@@ -68,7 +68,7 @@ export function DataTable<TData, TValue>({
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow
               key={headerGroup.id}
-              className="  !bg-layout-surface py-0 [&:has([role=checkbox])]:justify-center "
+              className="  border-layout-surface !bg-layout-surface py-0 [&:has([role=checkbox])]:justify-center "
             >
               {headerGroup.headers.map((header) => {
                 return (
