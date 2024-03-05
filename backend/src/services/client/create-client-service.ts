@@ -15,7 +15,6 @@ export const createClientService = async ({
   });
 
   if (existClient) {
-    console.log("ja existe");
     throw new AppError("Já existe um cliente com esse código", 409);
   }
 

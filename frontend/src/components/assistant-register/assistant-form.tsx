@@ -80,8 +80,6 @@ const AssistantForm = ({ setIsModalOpen }: AssistantFormProps) => {
     abortControllerRef.current.abort();
   };
   const onSubmit = async (data: AssistantFormData) => {
-    console.log(data);
-
     mutate(data);
   };
 

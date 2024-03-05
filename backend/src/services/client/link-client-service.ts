@@ -11,8 +11,6 @@ export const linkClientService = async ({
   assistantId,
 }: linkClientServiceTypes) => {
   try {
-    console.log(clientIds);
-
     const client = await prisma.client.updateMany({
       where: {
         id: {

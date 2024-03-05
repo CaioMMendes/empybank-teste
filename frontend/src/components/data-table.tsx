@@ -23,8 +23,6 @@ import { InputIconContainer, InputWithIcon } from "./ui/input";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  //   globalFilter:string,
-  //   setGlobalFilter:Dispatch<SetStateAction<string>>
   rowSelection: RowSelectionState | undefined;
   setRowSelection: Dispatch<SetStateAction<RowSelectionState>>;
 }

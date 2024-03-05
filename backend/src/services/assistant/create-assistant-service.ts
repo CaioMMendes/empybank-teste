@@ -33,10 +33,6 @@ export const createAssistantService = async ({
       phoneQuery,
     ]);
 
-    console.log("Resultado da consulta 1:", nameResult);
-    console.log("Resultado da consulta 2:", emailResult);
-    console.log("Resultado da consulta 3:", phoneResult);
-
     if (nameResult || emailResult || phoneResult) {
       return {
         status: "fail",

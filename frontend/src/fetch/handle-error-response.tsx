@@ -13,7 +13,6 @@ export function handleErrorResponse(
   defaultMessage: string = "Ocorreu um erro",
   callback?: () => void,
 ) {
-  console.log(error);
   if (error?.name === "CanceledError") {
     return toastError("A requisição foi cancelada");
   }

@@ -57,14 +57,11 @@ const AssistantSelect = () => {
   });
 
   const handleSelectChange = (assistantId: string) => {
-    console.log(assistantId);
-
     mutate(assistantId);
     // abortControllerRef.current.abort();
   };
 
   function handleSuccessResponse(data: GetUniqueDataResponse) {
-    console.log(data);
     const assistantWithClients = data?.data?.assistant ?? null;
     setSelectedAssistant(assistantWithClients);
   }
