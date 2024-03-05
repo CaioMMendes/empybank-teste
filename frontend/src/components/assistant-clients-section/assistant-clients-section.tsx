@@ -6,17 +6,19 @@ import {
   ErrorWithResponse,
   handleErrorResponse,
 } from "@/fetch/handle-error-response";
+import useNumberOfLinkedClientsChangedStore from "@/stores/number-linked-changed";
+import useNumberOfUnlinkedClientsChangedStore from "@/stores/number-unlinked-changed";
 import useSelectedAssistantStore from "@/stores/selected-assistant";
 import { getClientByIndex } from "@/utils/get-client-by-index";
 import { getIdByIndex } from "@/utils/get-ids-by-index";
+import { transformNumberToObject } from "@/utils/transform-number-to-object";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PiArrowCircleLeft } from "react-icons/pi";
 import { columns } from "../columns-table";
 import { DataTable } from "../data-table";
 import { toastSuccess } from "../toast";
 import { Button } from "../ui/button";
-import { Loading } from "../loading";
 
 type ClientType = {
   id: string;
@@ -39,10 +41,21 @@ export type ClientDataType = {
 const AssistantClientsSection = () => {
   const abortControllerRef = useRef(new AbortController());
   const [rowSelection, setRowSelection] = useState({});
+  const { numberOfLinkedClientsChanged, removeNumberOfLinkedClientsChanged } =
+    useNumberOfLinkedClientsChangedStore();
+  const { setNumberOfUnlinkedClientsChanged } =
+    useNumberOfUnlinkedClientsChangedStore();
   const rowKeys = Object.keys(rowSelection);
   const queryClient = useQueryClient();
   const { selectedAssistant, unlinkSelectedAssistantClients } =
     useSelectedAssistantStore();
+
+  useEffect(() => {
+    const rowsSelected = transformNumberToObject(numberOfLinkedClientsChanged);
+    setRowSelection(rowsSelected);
+    removeNumberOfLinkedClientsChanged();
+    //eslint-disable-next-line
+  }, [selectedAssistant]);
 
   const { mutate, isPending } = useMutation<
     UnlinkClientDataResponse,
@@ -64,6 +77,7 @@ const AssistantClientsSection = () => {
       const clients = getClientByIndex(rowKeys, selectedAssistant?.Client);
       const ids = getIdByIndex(rowKeys, selectedAssistant?.Client);
       unlinkSelectedAssistantClients(ids);
+      setNumberOfUnlinkedClientsChanged(count);
       queryClient.setQueryData(
         ["getUnlinkedClients"],
         (oldUnlinkedClients: ClientDataType) => {
@@ -71,8 +85,6 @@ const AssistantClientsSection = () => {
 
           if (clients && oldAssistantData !== undefined) {
             const newData = [...clients, ...oldAssistantData];
-            //   newData.sort((a, b) => a.name.localeCompare(b.name));
-            console.log(newData);
             return {
               ...oldUnlinkedClients,
               data: { ...oldUnlinkedClients.data, client: newData },
@@ -90,7 +102,6 @@ const AssistantClientsSection = () => {
     const clientIds = getIdByIndex(rowKeys, selectedAssistant?.Client);
     mutate(clientIds);
   };
-  console.log(selectedAssistant);
 
   return (
     <div className="bg- flex flex-col gap-4 rounded-[1.125rem] bg-layout-surface p-6">
