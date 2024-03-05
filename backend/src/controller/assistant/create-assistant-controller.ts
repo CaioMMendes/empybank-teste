@@ -1,7 +1,9 @@
 import { NextFunction, Request, Response } from "express";
+
 import catchAsync from "../../utils/catchAsync";
-import { createAssistantBody } from "../../types/assistant/create-assistant-type";
 import AppError from "../../utils/appError";
+
+import { createAssistantBody } from "../../types/assistant/create-assistant-type";
 import { createAssistantService } from "../../services/assistant/create-assistant-service";
 
 export const createAssistantController = catchAsync(

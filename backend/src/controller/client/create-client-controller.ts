@@ -1,7 +1,9 @@
 import { NextFunction, Request, Response } from "express";
+
 import catchAsync from "../../utils/catchAsync";
-import { createClientBody } from "../../types/client/create-client-type";
 import AppError from "../../utils/appError";
+
+import { createClientBody } from "../../types/client/create-client-type";
 import { createClientService } from "../../services/client/create-client-service";
 
 export const createClientController = catchAsync(

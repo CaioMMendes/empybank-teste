@@ -1,8 +1,10 @@
 import { NextFunction, Request, Response } from "express";
+
 import catchAsync from "../../utils/catchAsync";
 import AppError from "../../utils/appError";
-import { linkClientService } from "../../services/client/link-client-service";
+
 import { linkClientBody } from "../../types/client/link-client-type";
+import { linkClientService } from "../../services/client/link-client-service";
 
 export const linkClientController = catchAsync(
   async (request: Request, response: Response, next: NextFunction) => {

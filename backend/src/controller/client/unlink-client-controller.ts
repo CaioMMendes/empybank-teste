@@ -1,6 +1,8 @@
 import { NextFunction, Request, Response } from "express";
+
 import catchAsync from "../../utils/catchAsync";
 import AppError from "../../utils/appError";
+
 import { unlinkClientBody } from "../../types/client/unlink-client-type";
 import { unlinkClientService } from "../../services/client/unlink-client-service";
 

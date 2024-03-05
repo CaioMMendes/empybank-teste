@@ -1,4 +1,5 @@
 import { prisma } from "../../lib/prisma";
+
 import AppError from "../../utils/appError";
 
 export const getUniqueAssistantService = async (id: string) => {

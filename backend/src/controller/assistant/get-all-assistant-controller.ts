@@ -1,7 +1,9 @@
 import { NextFunction, Request, Response } from "express";
+
 import catchAsync from "../../utils/catchAsync";
-import { getAllAssistantService } from "../../services/assistant/get-all-assistant-service";
 import AppError from "../../utils/appError";
+
+import { getAllAssistantService } from "../../services/assistant/get-all-assistant-service";
 
 export const getAllAssistantController = catchAsync(
   async (request: Request, response: Response, next: NextFunction) => {

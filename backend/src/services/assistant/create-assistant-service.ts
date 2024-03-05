@@ -1,7 +1,9 @@
 import z from "zod";
-import { createAssistantBody } from "../../types/assistant/create-assistant-type";
 import { prisma } from "../../lib/prisma";
+
 import AppError from "../../utils/appError";
+
+import { createAssistantBody } from "../../types/assistant/create-assistant-type";
 
 type CreateAssistantServiceTypes = z.infer<typeof createAssistantBody>;
 

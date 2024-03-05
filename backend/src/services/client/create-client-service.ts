@@ -1,7 +1,9 @@
-import { prisma } from "../../lib/prisma";
-import AppError from "../../utils/appError";
-import { createClientBody } from "./../../types/client/create-client-type";
 import z from "zod";
+import { prisma } from "../../lib/prisma";
+
+import AppError from "../../utils/appError";
+
+import { createClientBody } from "./../../types/client/create-client-type";
 
 type CreateClientServiceTypes = z.infer<typeof createClientBody>;
 
