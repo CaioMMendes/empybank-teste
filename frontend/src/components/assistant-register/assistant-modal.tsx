@@ -27,7 +27,11 @@ const AssistantModal = ({
   return (
     <AlertDialog open={isModalOpen}>
       <AlertDialogTrigger asChild>
-        <Button size={"iconLarge"} onClick={handleOpenModal}>
+        <Button
+          size={"iconLarge"}
+          onClick={handleOpenModal}
+          name="add sales assistant"
+        >
           <PiPlusCircle size={22} />
         </Button>
       </AlertDialogTrigger>

@@ -69,14 +69,14 @@ const AssistantSelect = () => {
   return (
     <div className="flex w-full max-w-96 flex-col gap-1">
       <Select
-        name="selectCommercialAssistant"
+        name="Select Commercial Assistant"
         defaultValue={undefined}
         onValueChange={handleSelectChange}
         disabled={isLoading || isError || isPending}
       >
         <SelectTrigger
           className="w-full flex-nowrap truncate rounded-xl p-3 text-base capitalize leading-none"
-          name="triggerCommercialAssistant"
+          name="Trigger Commercial Assistant"
         >
           <SelectValue placeholder={`Selecione um assistente comercial`} />
         </SelectTrigger>
