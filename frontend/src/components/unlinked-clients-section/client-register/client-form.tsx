@@ -6,8 +6,13 @@ import {
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogFooter,
-} from "../ui/alert-dialog";
-import { Input, InputContainer, InputLabel, InputLabelText } from "../ui/input";
+} from "../../ui/alert-dialog";
+import {
+  Input,
+  InputContainer,
+  InputLabel,
+  InputLabelText,
+} from "../../ui/input";
 import { clientFormSchema } from "./types/client-form-schema";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
@@ -15,8 +20,8 @@ import {
   NewClientResponse,
   createClient,
 } from "@/fetch/client/create-client";
-import { toastError, toastSuccess } from "../toast";
-import { ClientDataType } from "../assistant-clients-section/assistant-clients-section";
+import { toastError, toastSuccess } from "../../toast";
+import { ClientDataType } from "../../assistant-clients-section/assistant-clients-section";
 
 type ClientFormProps = {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;

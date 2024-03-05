@@ -6,7 +6,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Dispatch, ReactNode, SetStateAction } from "react";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import { PiPlusCircle } from "react-icons/pi";
 
 type ClientModalProps = {

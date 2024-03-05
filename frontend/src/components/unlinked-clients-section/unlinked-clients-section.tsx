@@ -11,7 +11,7 @@ import useSelectedAssistantStore from "@/stores/selected-assistant";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRef, useState } from "react";
 import { PiArrowCircleRight } from "react-icons/pi";
-import ClientRegister from "../client-register/client-register";
+import ClientRegister from "./client-register/client-register";
 import { DataTable } from "../data-table";
 import { toastError, toastSuccess } from "../toast";
 import { Button } from "../ui/button";
