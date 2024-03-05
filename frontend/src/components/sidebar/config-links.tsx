@@ -12,7 +12,7 @@ const ConfigLinks = () => {
       <Button variant={"icon"} size={"icon"}>
         <PiSun size={24} />
       </Button>
-      <Avatar className="size-9">
+      <Avatar className="size-9 cursor-pointer  ">
         <AvatarImage src={avatarImage} />
         <AvatarFallback>A</AvatarFallback>
       </Avatar>
