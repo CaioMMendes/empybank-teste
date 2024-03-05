@@ -63,7 +63,7 @@ const UnlinkedClientsSection = () => {
     onError: (error) =>
       handleErrorResponse(
         error,
-        "Ocorreu um erro ao tentar vincular os clientes",
+        "Ocorreu um erro ao tentar vincular o(s) cliente(s)",
       ),
   });
 
@@ -86,13 +86,16 @@ const UnlinkedClientsSection = () => {
       setNumberOfLinkedClientsChanged(count);
       linkSelectedAssistantClients(clients);
       setRowSelection({});
-      return toastSuccess(`${count} clientes vinculados com sucesso`);
+      return toastSuccess(`${count} clientes vinculados com sucesso!`);
     }
   }
 
   const handleLinkClientClick = () => {
     if (selectedAssistant === null) {
       return toastError("Selecione um assistente comercial");
+    }
+    if (rowKeys.length === 0) {
+      return toastError("Selecione os clientes a serem vinculados");
     }
     const clientIds = getIdByIndex(rowKeys, unlinkedClientsData?.data.client);
     if (clientIds.length > 0) {

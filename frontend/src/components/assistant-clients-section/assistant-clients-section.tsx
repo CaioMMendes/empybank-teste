@@ -22,7 +22,7 @@ import { transformNumberToObject } from "@/utils/transform-number-to-object";
 //Components
 import { columns } from "../columns-table";
 import { DataTable } from "../data-table";
-import { toastSuccess } from "../toast";
+import { toastError, toastSuccess } from "../toast";
 import { Button } from "../ui/button";
 
 type ClientType = {
@@ -73,7 +73,7 @@ const AssistantClientsSection = () => {
     onError: (error) =>
       handleErrorResponse(
         error,
-        "Ocorreu um erro ao tentar desvincular os clientes",
+        "Ocorreu um erro ao tentar desvincular o(s) cliente(s)",
       ),
   });
 
@@ -101,11 +101,14 @@ const AssistantClientsSection = () => {
       );
 
       setRowSelection({});
-      return toastSuccess(`${count} clientes desvinculados com sucesso`);
+      return toastSuccess(`${count} cliente(s) desvinculado(s) com sucesso!`);
     }
   }
 
   const handleUnlinkClients = () => {
+    if (rowKeys.length === 0) {
+      return toastError("Selecione os clientes a serem desvinculados");
+    }
     const clientIds = getIdByIndex(rowKeys, selectedAssistant?.Client);
     mutate(clientIds);
   };
@@ -122,7 +125,7 @@ const AssistantClientsSection = () => {
                 <span className="capitalize">{selectedAssistant?.name}</span>
               </>
             ) : (
-              "Selecione um assistente"
+              "Selecione Um Sssistente Comercial"
             )}
           </h2>
           {selectedAssistant?.Client && (

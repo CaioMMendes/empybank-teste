@@ -92,7 +92,7 @@ const ClientForm = ({ setIsModalOpen }: ClientFormProps) => {
       },
     );
 
-    toastSuccess("Cliente cadastrado");
+    toastSuccess("Cliente cadastrado con sucesso!");
     reset();
   }
 

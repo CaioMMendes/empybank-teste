@@ -84,7 +84,7 @@ const AssistantForm = ({ setIsModalOpen }: AssistantFormProps) => {
   };
 
   function handleSuccessResponse(newAssistant: NewAssistantResponse) {
-    toastSuccess("Assistente cadastrado");
+    toastSuccess("Assistente cadastrado!");
     reset();
     setValue("phone", "");
 
