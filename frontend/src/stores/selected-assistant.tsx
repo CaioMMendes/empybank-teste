@@ -1,7 +1,8 @@
 import { create } from "zustand";
+import * as assistantManage from "./helpers/selected-assistant-manage";
 
 type ClientTypes = {
-  assistantId: string;
+  assistantId: string | null;
   code: string;
   createdAt: Date;
   id: string;
@@ -22,12 +23,12 @@ type UseSelectedAssistantTypes = {
   selectedAssistant: SelectedAssistantTypes | null;
   setSelectedAssistant: (selectedAssistant: SelectedAssistantTypes) => void;
   removeSelectedAssistant: () => void;
-  linkSelectedAssistantClients: () => void;
-  unlinkSelectedAssistantClients: () => void;
+  linkSelectedAssistantClients: (clients: ClientTypes[]) => void;
+  unlinkSelectedAssistantClients: (ids: string[]) => void;
 };
 
 const useSelectedAssistantStore = create<UseSelectedAssistantTypes>()(
-  (set /* get */) => ({
+  (set) => ({
     selectedAssistant: null,
 
     setSelectedAssistant: (selectedAssistant) => {
@@ -41,8 +42,22 @@ const useSelectedAssistantStore = create<UseSelectedAssistantTypes>()(
     removeSelectedAssistant: () => {
       set(() => ({ selectedAssistant: null }));
     },
-    linkSelectedAssistantClients: () => {},
-    unlinkSelectedAssistantClients: () => {},
+    linkSelectedAssistantClients: (clients) => {
+      set((state) => ({
+        selectedAssistant: assistantManage.linkAssistantClient(
+          state.selectedAssistant,
+          clients,
+        ),
+      }));
+    },
+    unlinkSelectedAssistantClients: (ids) => {
+      set((state) => ({
+        selectedAssistant: assistantManage.unlinkAssistantClient(
+          state.selectedAssistant,
+          ids,
+        ),
+      }));
+    },
   }),
 );
 export default useSelectedAssistantStore;
