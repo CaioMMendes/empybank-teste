@@ -21,7 +21,7 @@ export const createClientController = catchAsync(
       statusCode: 201,
       message: clientResponse?.message || "Cliente criado com sucesso!",
       data: {
-        clientResponse,
+        ...clientResponse.data,
       },
     });
   }

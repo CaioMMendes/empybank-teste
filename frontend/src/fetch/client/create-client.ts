@@ -11,9 +11,7 @@ export type NewClientResponse = {
 } & ClientFormData;
 
 export type CreateClientDataResponse = {
-  data: {
-    client: NewClientResponse;
-  };
+  data: NewClientResponse;
 };
 
 /**
