@@ -1,7 +1,16 @@
+import {
+  CreateClientDataResponse,
+  NewClientResponse,
+  createClient,
+} from "@/fetch/client/create-client";
+import useNumberOfUnlinkedClientsChangedStore from "@/stores/number-unlinked-changed";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Dispatch, SetStateAction, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { ClientDataType } from "../../assistant-clients-section/assistant-clients-section";
+import { toastError, toastSuccess } from "../../toast";
 import {
   AlertDialogAction,
   AlertDialogCancel,
@@ -14,14 +23,6 @@ import {
   InputLabelText,
 } from "../../ui/input";
 import { clientFormSchema } from "./types/client-form-schema";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import {
-  CreateClientDataResponse,
-  NewClientResponse,
-  createClient,
-} from "@/fetch/client/create-client";
-import { toastError, toastSuccess } from "../../toast";
-import { ClientDataType } from "../../assistant-clients-section/assistant-clients-section";
 
 type ClientFormProps = {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
@@ -40,6 +41,8 @@ type ErrorWithResponse = {
 const ClientForm = ({ setIsModalOpen }: ClientFormProps) => {
   const abortControllerRef = useRef(new AbortController());
   const queryClient = useQueryClient();
+  const { setNumberOfUnlinkedClientsChanged } =
+    useNumberOfUnlinkedClientsChangedStore();
 
   const {
     register,
@@ -67,13 +70,11 @@ const ClientForm = ({ setIsModalOpen }: ClientFormProps) => {
   };
 
   const onSubmit = async (data: ClientFormData) => {
-    console.log(data);
     mutate(data);
   };
 
   function handleSuccessResponse(newClient: NewClientResponse) {
-    console.log(newClient);
-
+    setNumberOfUnlinkedClientsChanged(1);
     queryClient.setQueryData(
       ["getUnlinkedClients"],
       (oldUnlinkedClients: ClientDataType) => {
@@ -81,9 +82,6 @@ const ClientForm = ({ setIsModalOpen }: ClientFormProps) => {
 
         if (newClient && oldAssistantData !== undefined) {
           const newData = [newClient, ...oldAssistantData];
-          //todo talvez fazer o sort aqui
-          //   newData.sort((a, b) => a.name.localeCompare(b.name));
-          console.log(newData);
           return {
             ...oldUnlinkedClients,
             data: { ...oldUnlinkedClients.data, client: newData },
@@ -98,7 +96,6 @@ const ClientForm = ({ setIsModalOpen }: ClientFormProps) => {
   }
 
   function handleErrorResponse(error: ErrorWithResponse) {
-    console.log(error);
     if (error?.name === "CanceledError") {
       return toastError("A requisição foi cancelada");
     }
