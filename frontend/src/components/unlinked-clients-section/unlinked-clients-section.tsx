@@ -9,7 +9,7 @@ import {
 } from "@/fetch/handle-error-response";
 import useSelectedAssistantStore from "@/stores/selected-assistant";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PiArrowCircleRight } from "react-icons/pi";
 import ClientRegister from "./client-register/client-register";
 import { DataTable } from "../data-table";
@@ -19,9 +19,18 @@ import { columns } from "../columns-table";
 import { getIdByIndex } from "@/utils/get-ids-by-index";
 import { getClientByIndex } from "@/utils/get-client-by-index";
 import { Loading } from "../loading";
+import useNumberOfUnlinkedClientsChangedStore from "@/stores/number-unlinked-changed";
+import { transformNumberToObject } from "@/utils/transform-number-to-object";
+import useNumberOfLinkedClientsChangedStore from "@/stores/number-linked-changed";
 
 const UnlinkedClientsSection = () => {
   const abortControllerRef = useRef(new AbortController());
+  const { setNumberOfLinkedClientsChanged } =
+    useNumberOfLinkedClientsChangedStore();
+  const {
+    numberOfUnlinkedClientsChanged,
+    removeNumberOfUnlinkedClientsChanged,
+  } = useNumberOfUnlinkedClientsChangedStore();
   const { selectedAssistant, linkSelectedAssistantClients } =
     useSelectedAssistantStore();
   const [rowSelection, setRowSelection] = useState({});
@@ -51,6 +60,14 @@ const UnlinkedClientsSection = () => {
         "Ocorreu um erro ao tentar vincular os clientes",
       ),
   });
+  useEffect(() => {
+    const rowsSelected = transformNumberToObject(
+      numberOfUnlinkedClientsChanged,
+    );
+    setRowSelection(rowsSelected);
+    removeNumberOfUnlinkedClientsChanged();
+    //eslint-disable-next-line
+  }, [unlinkedClientsData]);
 
   function handleSuccessResponse(count: number | null | undefined) {
     if (count) {
@@ -59,14 +76,15 @@ const UnlinkedClientsSection = () => {
         rowKeys,
         unlinkedClientsData?.data.client,
       );
+      setNumberOfLinkedClientsChanged(count);
       linkSelectedAssistantClients(clients);
       setRowSelection({});
+
       return toastSuccess(`${count} clientes vinculados com sucesso`);
     }
   }
 
   const handleLinkClientClick = () => {
-    console.log(selectedAssistant);
     if (selectedAssistant === null) {
       return toastError("Selecione um assistente comercial");
     }
@@ -120,8 +138,6 @@ const UnlinkedClientsSection = () => {
           data={unlinkedClientsData.data.client}
           rowSelection={rowSelection}
           setRowSelection={setRowSelection}
-          //   setGlobalFilter={setSearchInput}
-          //   globalFilter={debounceSearch}
         />
       )}
     </div>
