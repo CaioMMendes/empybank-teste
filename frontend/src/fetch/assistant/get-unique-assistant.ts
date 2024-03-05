@@ -2,7 +2,7 @@ import { GenericAbortSignal } from "axios";
 import fetchFunction from "../fetch-function";
 import { z } from "zod";
 import { assistantFormSchema } from "@/components/assistant-register/types/assistant-form-schema";
-import { clientFormSchema } from "@/components/client-register/types/client-form-schema";
+import { clientFormSchema } from "@/components/unlinked-clients-section/client-register/types/client-form-schema";
 
 type AssistantFormData = z.infer<typeof assistantFormSchema>;
 type ClientFormData = z.infer<typeof clientFormSchema>;
@@ -10,7 +10,7 @@ type ClientFormData = z.infer<typeof clientFormSchema>;
 type ClientResponse = {
   id: string;
   createdAt: Date;
-  assistantId: string;
+  assistantId: string | null;
 } & ClientFormData;
 
 export type GetUniqueAssistantResponse = {

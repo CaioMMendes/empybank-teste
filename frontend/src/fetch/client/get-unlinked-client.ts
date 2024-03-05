@@ -1,6 +1,6 @@
 import { z } from "zod";
 import fetchFunction from "../fetch-function";
-import { clientFormSchema } from "@/components/client-register/types/client-form-schema";
+import { clientFormSchema } from "@/components/unlinked-clients-section/client-register/types/client-form-schema";
 
 type ClientFormData = z.infer<typeof clientFormSchema>;
 

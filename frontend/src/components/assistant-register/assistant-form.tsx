@@ -23,7 +23,7 @@ import {
 } from "@/fetch/handle-error-response";
 
 type AssistantType = {
-  createdAt: string;
+  createdAt: Date;
   email: string;
   id: string;
   name: string;
