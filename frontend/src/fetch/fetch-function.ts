@@ -41,7 +41,9 @@ const fetchFunction = async <T, R>({
           signal,
           headers: {
             "content-Type": "application/json",
+            "Access-Control-Allow-Credentials": "true",
           },
+          withCredentials: true,
           ...options,
         },
       );
@@ -55,7 +57,9 @@ const fetchFunction = async <T, R>({
         signal,
         headers: {
           "content-Type": "application/json",
+          "Access-Control-Allow-Credentials": "true",
         },
+        withCredentials: true,
         ...options,
       },
     );
