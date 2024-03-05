@@ -76,6 +76,20 @@
     @apply mx-auto flex !max-h-screen !min-h-screen w-full bg-layout-surface text-foreground;
   }
   #root {
-    @apply mx-auto flex h-full  min-h-screen w-full flex-col 4xl:max-w-screen-4xl;
+    @apply 5xl:max-w-screen-5xl mx-auto flex  h-full min-h-screen w-full flex-col;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  ::-webkit-scrollbar {
+    @apply w-[0.45rem];
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-layout-body;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-primary;
   }
 }
