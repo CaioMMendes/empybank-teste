@@ -1,3 +1,8 @@
+//Libs
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useRef } from "react";
+
+//Functions
 import {
   GetAllDataResponse,
   getAllAssistant,
@@ -6,8 +11,10 @@ import {
   GetUniqueDataResponse,
   getUniqueAssistant,
 } from "@/fetch/assistant/get-unique-assistant";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { useRef } from "react";
+import { handleErrorResponse } from "@/fetch/handle-error-response";
+import useSelectedAssistantStore from "@/stores/selected-assistant";
+
+//Components
 import {
   Select,
   SelectContent,
@@ -16,8 +23,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import useSelectedAssistantStore from "@/stores/selected-assistant";
-import { handleErrorResponse } from "@/fetch/handle-error-response";
 
 type ErrorWithResponse = {
   response: {
@@ -52,13 +57,11 @@ const AssistantSelect = () => {
       handleErrorResponse(
         error,
         "Ocorreu um erro ao tentar encontrar os dados do assistente",
-        //todo talvez eu precise restar os clientes dos usuarios aqui, pra testar é só pegar os assistentes e depois fechar o backend
       ),
   });
 
   const handleSelectChange = (assistantId: string) => {
     mutate(assistantId);
-    // abortControllerRef.current.abort();
   };
 
   function handleSuccessResponse(data: GetUniqueDataResponse) {

@@ -1,3 +1,6 @@
+import { Dispatch, ReactNode, SetStateAction } from "react";
+import { PiPlusCircle } from "react-icons/pi";
+
 import {
   AlertDialog,
   AlertDialogContent,
@@ -5,9 +8,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Dispatch, ReactNode, SetStateAction } from "react";
 import { Button } from "../../ui/button";
-import { PiPlusCircle } from "react-icons/pi";
 
 type ClientModalProps = {
   children: ReactNode;
@@ -40,7 +41,6 @@ const ClientModal = ({
         <AlertDialogHeader>
           <AlertDialogTitle>Cadastro do Cliente</AlertDialogTitle>
         </AlertDialogHeader>
-
         {children}
       </AlertDialogContent>
     </AlertDialog>

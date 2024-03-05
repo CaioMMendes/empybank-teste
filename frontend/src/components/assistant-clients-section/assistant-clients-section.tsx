@@ -1,20 +1,25 @@
-import {
-  UnlinkClientDataResponse,
-  unlinkClient,
-} from "@/fetch/client/unlink-client";
+// Libs
+import { useEffect, useRef, useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { PiArrowCircleLeft } from "react-icons/pi";
+
+//Functions
 import {
   ErrorWithResponse,
   handleErrorResponse,
 } from "@/fetch/handle-error-response";
+import {
+  UnlinkClientDataResponse,
+  unlinkClient,
+} from "@/fetch/client/unlink-client";
 import useNumberOfLinkedClientsChangedStore from "@/stores/number-linked-changed";
 import useNumberOfUnlinkedClientsChangedStore from "@/stores/number-unlinked-changed";
 import useSelectedAssistantStore from "@/stores/selected-assistant";
 import { getClientByIndex } from "@/utils/get-client-by-index";
 import { getIdByIndex } from "@/utils/get-ids-by-index";
 import { transformNumberToObject } from "@/utils/transform-number-to-object";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useRef, useState } from "react";
-import { PiArrowCircleLeft } from "react-icons/pi";
+
+//Components
 import { columns } from "../columns-table";
 import { DataTable } from "../data-table";
 import { toastSuccess } from "../toast";
@@ -40,15 +45,15 @@ export type ClientDataType = {
 
 const AssistantClientsSection = () => {
   const abortControllerRef = useRef(new AbortController());
+  const queryClient = useQueryClient();
   const [rowSelection, setRowSelection] = useState({});
   const { numberOfLinkedClientsChanged, removeNumberOfLinkedClientsChanged } =
     useNumberOfLinkedClientsChangedStore();
   const { setNumberOfUnlinkedClientsChanged } =
     useNumberOfUnlinkedClientsChangedStore();
-  const rowKeys = Object.keys(rowSelection);
-  const queryClient = useQueryClient();
   const { selectedAssistant, unlinkSelectedAssistantClients } =
     useSelectedAssistantStore();
+  const rowKeys = Object.keys(rowSelection);
 
   useEffect(() => {
     const rowsSelected = transformNumberToObject(numberOfLinkedClientsChanged);
@@ -90,9 +95,11 @@ const AssistantClientsSection = () => {
               data: { ...oldUnlinkedClients.data, client: newData },
             };
           }
+
           return oldUnlinkedClients;
         },
       );
+
       setRowSelection({});
       return toastSuccess(`${count} clientes desvinculados com sucesso`);
     }
@@ -104,7 +111,7 @@ const AssistantClientsSection = () => {
   };
 
   return (
-    <div className="bg- flex flex-col gap-4 rounded-[1.125rem] bg-layout-surface p-6">
+    <div className="flex max-h-[49.3125rem] min-h-[49.3125rem] flex-col gap-4 overflow-hidden rounded-[1.125rem] bg-layout-surface p-6">
       {/* header */}
       <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-4 ">
@@ -142,6 +149,7 @@ const AssistantClientsSection = () => {
         )}
       </div>
 
+      {/* Tabela */}
       {selectedAssistant?.Client && (
         <DataTable
           columns={columns}

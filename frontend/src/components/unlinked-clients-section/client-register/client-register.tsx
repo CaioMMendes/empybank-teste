@@ -1,6 +1,7 @@
+import { useState } from "react";
+
 import ClientForm from "./client-form";
 import ClientModal from "./client-modal";
-import { useState } from "react";
 
 const ClientRegister = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

@@ -16,6 +16,11 @@ export type GetUnlinkedDataResponse = {
   };
 };
 
+/**
+ *
+ * @returns Retorna todos os clientes não vinculados
+ */
+
 export const getUnlinkedClient = async () => {
   const response: GetUnlinkedDataResponse = await fetchFunction({
     url: "/client/get",

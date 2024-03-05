@@ -13,11 +13,7 @@ export const columns: ColumnDef<Payment>[] = [
     header: ({ table }) => (
       <div className="flex w-[1.125rem] items-center justify-center">
         <Checkbox
-          checked={
-            table.getIsAllPageRowsSelected()
-            //todo removi para não ficar marcado quando seleciona apenas alguns/* ||
-            // (table.getIsSomePageRowsSelected() && "indeterminate") */
-          }
+          checked={table.getIsAllPageRowsSelected()}
           onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
           aria-label="Select all"
         />

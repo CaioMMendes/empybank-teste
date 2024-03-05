@@ -1,3 +1,8 @@
+//Libs
+import { Dispatch, ReactNode, SetStateAction } from "react";
+import { PiPlusCircle } from "react-icons/pi";
+
+//Components
 import {
   AlertDialog,
   AlertDialogContent,
@@ -5,9 +10,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Dispatch, ReactNode, SetStateAction } from "react";
 import { Button } from "../ui/button";
-import { PiPlusCircle } from "react-icons/pi";
 
 type AssistantModalProps = {
   children: ReactNode;
@@ -39,7 +42,6 @@ const AssistantModal = ({
         <AlertDialogHeader>
           <AlertDialogTitle>Cadastro de Assistente Comercial</AlertDialogTitle>
         </AlertDialogHeader>
-
         {children}
       </AlertDialogContent>
     </AlertDialog>

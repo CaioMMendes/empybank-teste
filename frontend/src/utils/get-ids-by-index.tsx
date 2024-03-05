@@ -1,5 +1,5 @@
-import { clientFormSchema } from "@/components/unlinked-clients-section/client-register/types/client-form-schema";
 import { z } from "zod";
+import { clientFormSchema } from "@/components/unlinked-clients-section/client-register/types/client-form-schema";
 
 type ClientFormData = z.infer<typeof clientFormSchema>;
 

@@ -11,7 +11,6 @@ export const Loading = ({ color = "#00bdff", ...props }: LoadingProps) => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       style={{
-        margin: "auto",
         background: "0 0",
       }}
       width="200px"

@@ -1,7 +1,7 @@
+import { z } from "zod";
 import { GenericAbortSignal } from "axios";
 import fetchFunction from "../fetch-function";
 import { clientFormSchema } from "@/components/unlinked-clients-section/client-register/types/client-form-schema";
-import { z } from "zod";
 
 type ClientFormData = z.infer<typeof clientFormSchema>;
 

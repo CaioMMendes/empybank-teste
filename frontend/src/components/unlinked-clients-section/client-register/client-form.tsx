@@ -1,16 +1,19 @@
+//Libs
+import { Dispatch, SetStateAction, useRef } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+//Functions
 import {
   CreateClientDataResponse,
   NewClientResponse,
   createClient,
 } from "@/fetch/client/create-client";
 import useNumberOfUnlinkedClientsChangedStore from "@/stores/number-unlinked-changed";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Dispatch, SetStateAction, useRef } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { ClientDataType } from "../../assistant-clients-section/assistant-clients-section";
-import { toastError, toastSuccess } from "../../toast";
+
+//Components
 import {
   AlertDialogAction,
   AlertDialogCancel,
@@ -22,6 +25,9 @@ import {
   InputLabel,
   InputLabelText,
 } from "../../ui/input";
+import { toastError, toastSuccess } from "../../toast";
+
+import { ClientDataType } from "../../assistant-clients-section/assistant-clients-section";
 import { clientFormSchema } from "./types/client-form-schema";
 
 type ClientFormProps = {
@@ -64,11 +70,6 @@ const ClientForm = ({ setIsModalOpen }: ClientFormProps) => {
     onError: handleErrorResponse,
   });
 
-  const handleCancelClick = () => {
-    setIsModalOpen(false);
-    abortControllerRef.current.abort();
-  };
-
   const onSubmit = async (data: ClientFormData) => {
     mutate(data);
   };
@@ -99,10 +100,14 @@ const ClientForm = ({ setIsModalOpen }: ClientFormProps) => {
     if (error?.name === "CanceledError") {
       return toastError("A requisição foi cancelada");
     }
-
     const errorMessage = error?.response?.data?.message;
     toastError(errorMessage || "Ocorreu um erro ao tentar cadastrar o cliente");
   }
+
+  const handleCancelClick = () => {
+    setIsModalOpen(false);
+    abortControllerRef.current.abort();
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6 p-6">

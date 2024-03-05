@@ -3,6 +3,7 @@
  * @param number número de linhas a serem geradas
  * @returns retorna um objeto com o numero de linhas [index]:true
  */
+
 export const transformNumberToObject = (number: number | null) => {
   if (!number) {
     return {};

@@ -1,7 +1,7 @@
 import { PiSun, PiUserCircle } from "react-icons/pi";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
 import avatarImage from "/avatarImage.png";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 const ConfigLinks = () => {
   return (

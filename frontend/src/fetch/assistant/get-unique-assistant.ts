@@ -1,6 +1,6 @@
+import { z } from "zod";
 import { GenericAbortSignal } from "axios";
 import fetchFunction from "../fetch-function";
-import { z } from "zod";
 import { assistantFormSchema } from "@/components/assistant-register/types/assistant-form-schema";
 import { clientFormSchema } from "@/components/unlinked-clients-section/client-register/types/client-form-schema";
 
@@ -24,6 +24,13 @@ export type GetUniqueDataResponse = {
     assistant: GetUniqueAssistantResponse;
   };
 };
+
+/**
+ *
+ * @param assistantId Id do assistente
+ * @param signal Signal para realizar o abort da requisição
+ * @returns Retorna o assistente que contem esse id com seus clientes
+ */
 
 export const getUniqueAssistant = async (
   assistantId: string,

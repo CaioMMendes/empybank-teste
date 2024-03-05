@@ -1,3 +1,9 @@
+//Libs
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useEffect, useRef, useState } from "react";
+import { PiArrowCircleRight } from "react-icons/pi";
+
+//Functions
 import {
   GetUnlinkedDataResponse,
   getUnlinkedClient,
@@ -8,23 +14,24 @@ import {
   handleErrorResponse,
 } from "@/fetch/handle-error-response";
 import useSelectedAssistantStore from "@/stores/selected-assistant";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useRef, useState } from "react";
-import { PiArrowCircleRight } from "react-icons/pi";
+import { getIdByIndex } from "@/utils/get-ids-by-index";
+import { getClientByIndex } from "@/utils/get-client-by-index";
+import useNumberOfUnlinkedClientsChangedStore from "@/stores/number-unlinked-changed";
+import { transformNumberToObject } from "@/utils/transform-number-to-object";
+import useNumberOfLinkedClientsChangedStore from "@/stores/number-linked-changed";
+
+//Components
 import ClientRegister from "./client-register/client-register";
 import { DataTable } from "../data-table";
 import { toastError, toastSuccess } from "../toast";
 import { Button } from "../ui/button";
 import { columns } from "../columns-table";
-import { getIdByIndex } from "@/utils/get-ids-by-index";
-import { getClientByIndex } from "@/utils/get-client-by-index";
 import { Loading } from "../loading";
-import useNumberOfUnlinkedClientsChangedStore from "@/stores/number-unlinked-changed";
-import { transformNumberToObject } from "@/utils/transform-number-to-object";
-import useNumberOfLinkedClientsChangedStore from "@/stores/number-linked-changed";
 
 const UnlinkedClientsSection = () => {
   const abortControllerRef = useRef(new AbortController());
+  const [rowSelection, setRowSelection] = useState({});
+  const queryClient = useQueryClient();
   const { setNumberOfLinkedClientsChanged } =
     useNumberOfLinkedClientsChangedStore();
   const {
@@ -33,9 +40,8 @@ const UnlinkedClientsSection = () => {
   } = useNumberOfUnlinkedClientsChangedStore();
   const { selectedAssistant, linkSelectedAssistantClients } =
     useSelectedAssistantStore();
-  const [rowSelection, setRowSelection] = useState({});
-  const queryClient = useQueryClient();
   const rowKeys = Object.keys(rowSelection);
+
   const {
     data: unlinkedClientsData,
     isLoading,
@@ -60,6 +66,7 @@ const UnlinkedClientsSection = () => {
         "Ocorreu um erro ao tentar vincular os clientes",
       ),
   });
+
   useEffect(() => {
     const rowsSelected = transformNumberToObject(
       numberOfUnlinkedClientsChanged,
@@ -79,7 +86,6 @@ const UnlinkedClientsSection = () => {
       setNumberOfLinkedClientsChanged(count);
       linkSelectedAssistantClients(clients);
       setRowSelection({});
-
       return toastSuccess(`${count} clientes vinculados com sucesso`);
     }
   }
@@ -122,8 +128,8 @@ const UnlinkedClientsSection = () => {
       </div>
 
       {isLoading && (
-        <div className="flex h-full w-full items-center justify-center">
-          <Loading className="size-10" />
+        <div className="flex h-full w-full items-start justify-center p-5">
+          <Loading className="flex size-10 " />
         </div>
       )}
 

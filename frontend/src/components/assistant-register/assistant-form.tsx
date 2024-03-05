@@ -1,27 +1,33 @@
+//Libs
+import { Dispatch, SetStateAction, useRef } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Controller, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+
+//Functions
+import {
+  ErrorWithResponse,
+  handleErrorResponse,
+} from "@/fetch/handle-error-response";
 import {
   DataResponse,
   NewAssistantResponse,
   createAssistant,
 } from "@/fetch/assistant/create-assistant";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Dispatch, SetStateAction, useRef } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { z } from "zod";
-import PhoneInput from "../assistant-register/phone-input";
-import { toastSuccess } from "../toast";
+
+//Components
 import {
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogFooter,
 } from "../ui/alert-dialog";
 import { Input, InputContainer, InputLabel, InputLabelText } from "../ui/input";
-import { assistantFormSchema } from "./types/assistant-form-schema";
-import {
-  ErrorWithResponse,
-  handleErrorResponse,
-} from "@/fetch/handle-error-response";
+import PhoneInput from "../assistant-register/phone-input";
+import { toastSuccess } from "../toast";
 
+//Types
+import { assistantFormSchema } from "./types/assistant-form-schema";
 type AssistantType = {
   createdAt: Date;
   email: string;
@@ -29,7 +35,6 @@ type AssistantType = {
   name: string;
   phone: string;
 };
-
 export type AssistantDataType = {
   status: string;
   message: string;
@@ -39,11 +44,9 @@ export type AssistantDataType = {
       }
     | undefined;
 };
-
 type AssistantFormProps = {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
 };
-
 export type AssistantFormData = z.infer<typeof assistantFormSchema>;
 
 const AssistantForm = ({ setIsModalOpen }: AssistantFormProps) => {
@@ -75,10 +78,7 @@ const AssistantForm = ({ setIsModalOpen }: AssistantFormProps) => {
   } = useForm<AssistantFormData>({
     resolver: zodResolver(assistantFormSchema),
   });
-  const handleCancelClick = () => {
-    setIsModalOpen(false);
-    abortControllerRef.current.abort();
-  };
+
   const onSubmit = async (data: AssistantFormData) => {
     mutate(data);
   };
@@ -104,6 +104,11 @@ const AssistantForm = ({ setIsModalOpen }: AssistantFormProps) => {
       },
     );
   }
+
+  const handleCancelClick = () => {
+    setIsModalOpen(false);
+    abortControllerRef.current.abort();
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6 ">

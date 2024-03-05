@@ -1,13 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
-import "./index.css";
-import ErrorPage from "./pages/error-page.tsx";
-import NotFoundPage from "./pages/not-found-page.tsx";
+
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import ReactQueryProvider from "./providers/react-query-provider.tsx";
+
+import App from "./App.tsx";
+import NotFoundPage from "./pages/not-found-page.tsx";
+import ErrorPage from "./pages/error-page.tsx";
 import { ToastContainer } from "react-toastify";
 
+import "./index.css";
 import "react-toastify/dist/ReactToastify.css";
 
 const router = createBrowserRouter([

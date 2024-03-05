@@ -1,7 +1,7 @@
-import fetchFunction from "../fetch-function";
-import { GenericAbortSignal } from "axios";
-import { assistantFormSchema } from "@/components/assistant-register/types/assistant-form-schema";
 import { z } from "zod";
+import { GenericAbortSignal } from "axios";
+import fetchFunction from "../fetch-function";
+import { assistantFormSchema } from "@/components/assistant-register/types/assistant-form-schema";
 
 type AssistantFormData = z.infer<typeof assistantFormSchema>;
 
