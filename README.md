@@ -1,8 +1,14 @@
-Empybank teste
+## 🖥 Imagens do projeto
+
+<div align="center" style="justify-content:center; display:flex; flex-direction:column; gap:20px">
+<img  title="Página inicial" src="./github/home.png" alt="Imagem do projeto desktop"  />
+<img  title="Tela de cadastro de clientes" src="./github/cadastroCliente.png" alt="Tela de cadastro de clientes"  />
+<img  title="Tela de cadastro de assistentes" src="./github/cadastroAssistente.png" alt="Tela de cadastro de assistentes"  />
+</div>
 
 ## 📌 Sobre
 
-**Empybanck-teste** foi um projeto realizado para teste de avaliação para ingressar na vaga de desenvolvedor full stack na empresa empy bank.
+**Empybank-teste** foi um projeto realizado para teste de avaliação para ingressar na vaga de desenvolvedor full stack na empresa empy bank.
 
 ## 🚀 Tecnologias utilizadas
 
@@ -102,7 +108,7 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
 
 ## 💻 Exemplo do projeto
 
-colocar o gif aqui
+<img  title="Gif projeto" src="./github/gif.gif" height="338" width="600"  />
 
 ## 👀 O projeto pode ser vizualizado pelo seguinte link
 
