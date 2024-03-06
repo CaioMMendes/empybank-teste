@@ -107,7 +107,7 @@ const AssistantClientsSection = () => {
 
   const handleUnlinkClients = () => {
     if (rowKeys.length === 0) {
-      return toastError("Selecione os clientes a serem desvinculados");
+      return toastError("Selecione os clientes a serem desvinculados.");
     }
     const clientIds = getIdByIndex(rowKeys, selectedAssistant?.Client);
     mutate(clientIds);
@@ -125,7 +125,7 @@ const AssistantClientsSection = () => {
                 <span className="capitalize">{selectedAssistant?.name}</span>
               </>
             ) : (
-              "Selecione Um Sssistente Comercial"
+              "Selecione um assistente comercial"
             )}
           </h2>
           {selectedAssistant?.Client && (

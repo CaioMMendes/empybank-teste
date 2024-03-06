@@ -92,10 +92,10 @@ const UnlinkedClientsSection = () => {
 
   const handleLinkClientClick = () => {
     if (selectedAssistant === null) {
-      return toastError("Selecione um assistente comercial");
+      return toastError("Selecione um assistente comercial.");
     }
     if (rowKeys.length === 0) {
-      return toastError("Selecione os clientes a serem vinculados");
+      return toastError("Selecione os clientes a serem vinculados.");
     }
     const clientIds = getIdByIndex(rowKeys, unlinkedClientsData?.data.client);
     if (clientIds.length > 0) {
@@ -138,7 +138,7 @@ const UnlinkedClientsSection = () => {
 
       {isError && (
         <h2 className="flex items-center text-base text-red-500">
-          Ocorreu um erro ao tentar encontrar os clientes não vinculados
+          Ocorreu um erro ao tentar encontrar os clientes não vinculados.
         </h2>
       )}
       {isSuccess && (

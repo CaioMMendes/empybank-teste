@@ -98,10 +98,12 @@ const ClientForm = ({ setIsModalOpen }: ClientFormProps) => {
 
   function handleErrorResponse(error: ErrorWithResponse) {
     if (error?.name === "CanceledError") {
-      return toastError("A requisição foi cancelada");
+      return toastError("A requisição foi cancelada.");
     }
     const errorMessage = error?.response?.data?.message;
-    toastError(errorMessage || "Ocorreu um erro ao tentar cadastrar o cliente");
+    toastError(
+      errorMessage || "Ocorreu um erro ao tentar cadastrar o cliente.",
+    );
   }
 
   const handleCancelClick = () => {

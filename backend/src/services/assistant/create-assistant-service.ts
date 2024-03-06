@@ -39,10 +39,10 @@ export const createAssistantService = async ({
       return {
         status: "fail",
         statusCode: 409,
-        message: `Os seguintes dados já estão registrados ${
-          nameResult?.name ? nameResult.name : ""
-        } ${emailResult?.email ? emailResult.email : ""} ${
-          phoneResult?.phone ? phoneResult.phone : ""
+        message: `Os seguintes dados já estão registrados do assistente ${
+          nameResult?.name ? "name:" : ""
+        } ${emailResult?.email ? "email:" : ""} ${
+          phoneResult?.phone ? "phone:" : ""
         } `,
       };
     }

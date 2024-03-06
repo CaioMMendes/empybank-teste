@@ -106,7 +106,7 @@ export function DataTable<TData, TValue>({
                 colSpan={columns.length}
                 className="flex w-full flex-1 items-center !justify-start "
               >
-                No results.
+                Não foi encontrado nenhum cliente.
               </TableCell>
             </TableRow>
           )}
