@@ -7,7 +7,7 @@ export const createAssistantBody = z.object({
     .min(1, "Você precisa preencher este campo")
     .max(200, "Você ultrapassou o limite de 200 caracteres")
     .toLowerCase()
-    .regex(/^[a-zA-Z0-9]+(?: [a-zA-Z0-9]+)*$/),
+    .regex(/^[a-zA-ZÀ-ÿ]+(?: [a-zA-ZÀ-ÿ]+)*$/),
 
   email: z
     .string()
