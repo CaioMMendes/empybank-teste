@@ -14,10 +14,24 @@ export function handleErrorResponse(
   callback?: () => void,
 ) {
   if (error?.name === "CanceledError") {
-    return toastError("A requisição foi cancelada");
+    return toastError("A requisição foi cancelada.");
   }
 
   const errorMessage = error?.response?.data?.message;
-  toastError(errorMessage || defaultMessage);
+
+  if (
+    errorMessage.includes(
+      "Os seguintes dados já estão registrados do assistente",
+    )
+  ) {
+    errorMessage.includes("name:") &&
+      toastError("Este nome já foi cadastrado.");
+    errorMessage.includes("email:") &&
+      toastError("Este e-mail já foi cadastrado.");
+    errorMessage.includes("phone:") &&
+      toastError("Este telefone já foi cadastrado.");
+  } else {
+    toastError(errorMessage || defaultMessage);
+  }
   callback && callback();
 }
