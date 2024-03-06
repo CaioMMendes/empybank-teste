@@ -33,9 +33,7 @@ export const columns: ColumnDef<Payment>[] = [
     accessorKey: "code",
     header: () => <div className="w-16"> Código</div>,
     cell: ({ row }) => (
-      <div className="flex w-full flex-1 capitalize">
-        {row.getValue("code")}
-      </div>
+      <div className="flex w-full flex-1 ">{row.getValue("code")}</div>
     ),
   },
   {
