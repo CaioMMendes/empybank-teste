@@ -81,7 +81,7 @@ const AssistantSelect = () => {
           className="w-full flex-nowrap truncate rounded-xl p-3 text-base capitalize leading-none"
           name="Trigger Commercial Assistant"
         >
-          <SelectValue placeholder={`Selecione um assistente comercial`} />
+          <SelectValue placeholder={`Selecionar`} />
         </SelectTrigger>
         <SelectContent
           ref={(ref) => {
@@ -108,12 +108,12 @@ const AssistantSelect = () => {
       </Select>
       {isError && (
         <span className="text-sm text-red-500">
-          Ocorreu um erro ao buscar os assistentes
+          Ocorreu um erro ao buscar os assistentes.
         </span>
       )}
       {mutateIsError && (
         <span className="text-sm text-red-500">
-          Ocorreu um erro ao buscar os dados do assistente
+          Ocorreu um erro ao buscar os dados do assistente.
         </span>
       )}
     </div>
